@@ -1,3 +1,4 @@
+
 package io.swagger.codegen.v3.generators;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -393,7 +394,7 @@ public abstract class DefaultCodegenConfig implements CodegenConfig {
     /**
      * Return the sanitized variable name for enum
      *
-     * @param value enum variable name
+     * @param value enum variable name、
      * @param datatype data type
      * @return the sanitized variable name for enum
      */
@@ -2492,6 +2493,11 @@ public abstract class DefaultCodegenConfig implements CodegenConfig {
                     codegenParameter.pattern != null) {
                 codegenParameter.getVendorExtensions().put(CodegenConstants.HAS_VALIDATION_EXT_NAME, Boolean.TRUE);
             }
+
+        } else {
+
+            // set name even there is no Schema to avoid null exception when codegenParameter.getName
+            codegenParameter.paramName = toParamName(parameter.getName());
 
         }
 
